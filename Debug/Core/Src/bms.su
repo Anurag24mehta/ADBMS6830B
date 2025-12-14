@@ -1,0 +1,4 @@
+../Core/Src/bms.c:27:6:BMS_INIT	8	static
+../Core/Src/bms.c:48:6:READ_ALL_CELL_VOLTAGE	64	static
+../Core/Src/bms.c:71:6:PRINT_ALL_CELL_VOLTAGE	32	static
+../Core/Src/bms.c:80:6:OPEN_WIRE_CHECK	80	static

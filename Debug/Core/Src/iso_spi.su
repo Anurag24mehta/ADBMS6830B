@@ -1,0 +1,2 @@
+../Core/Src/iso_spi.c:15:6:BMS_WRITE	32	static
+../Core/Src/iso_spi.c:29:6:BMS_READ	32	static
