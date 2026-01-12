@@ -41,6 +41,8 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
+#define SEGMENT 1			//No of Segment
+
 
 /* USER CODE END EC */
 

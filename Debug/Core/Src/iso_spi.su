@@ -1,2 +1,4 @@
 ../Core/Src/iso_spi.c:15:6:BMS_WRITE	32	static
-../Core/Src/iso_spi.c:29:6:BMS_READ	32	static
+../Core/Src/iso_spi.c:32:6:BMS_READ	32	static
+../Core/Src/iso_spi.c:43:6:BMS_SNAP	8	static
+../Core/Src/iso_spi.c:50:6:BMS_UNSNAP	8	static

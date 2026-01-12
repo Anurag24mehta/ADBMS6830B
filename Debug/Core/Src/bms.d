@@ -1,5 +1,4 @@
-Core/Src/bms.o: ../Core/Src/bms.c ../Core/Inc/bms.h ../Core/Inc/iso_spi.h \
- ../Core/Inc/command.h ../Core/Inc/main.h \
+Core/Src/bms.o: ../Core/Src/bms.c ../Core/Inc/bms.h ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  ../Core/Inc/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
@@ -28,10 +27,10 @@ Core/Src/bms.o: ../Core/Src/bms.c ../Core/Inc/bms.h ../Core/Inc/iso_spi.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
- ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
+ ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
+ ../Core/Inc/iso_spi.h ../Core/Inc/command.h ../Core/Inc/main.h \
+ ../Core/Inc/vt6_ntc.h ../Core/Inc/print.h
 ../Core/Inc/bms.h:
-../Core/Inc/iso_spi.h:
-../Core/Inc/command.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
@@ -62,3 +61,8 @@ Core/Src/bms.o: ../Core/Src/bms.c ../Core/Inc/bms.h ../Core/Inc/iso_spi.h \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi_ex.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
+../Core/Inc/iso_spi.h:
+../Core/Inc/command.h:
+../Core/Inc/main.h:
+../Core/Inc/vt6_ntc.h:
+../Core/Inc/print.h:

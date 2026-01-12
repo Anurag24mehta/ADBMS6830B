@@ -29,7 +29,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/crc.h ../Core/Inc/command.h ../Core/Inc/iso_spi.h \
- ../Core/Inc/bms.h ../Core/Inc/print.h
+ ../Core/Inc/main.h ../Core/Inc/bms.h ../Core/Inc/print.h \
+ ../Core/Inc/vt6_ntc.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
@@ -63,5 +64,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/crc.h:
 ../Core/Inc/command.h:
 ../Core/Inc/iso_spi.h:
+../Core/Inc/main.h:
 ../Core/Inc/bms.h:
 ../Core/Inc/print.h:
+../Core/Inc/vt6_ntc.h:

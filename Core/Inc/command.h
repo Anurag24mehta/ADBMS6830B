@@ -26,7 +26,17 @@ extern const uint8_t RDACALL[2];
 extern const uint8_t SNAP[4];
 extern const uint8_t UNSNAP[4];
 extern const uint8_t RDSTATD[2];
+extern const uint8_t RDSVA[2];
+extern const uint8_t RDSVB[2];
+extern const uint8_t RDSVC[2];
+extern const uint8_t RDSVD[2];
+extern const uint8_t RDSVE[2];
+extern const uint8_t RDSVF[2];
 extern const uint8_t RDSALL[2];
+extern const uint8_t RDAUXA[2];
+extern const uint8_t RDAUXB[2];
+extern const uint8_t RDAUXC[2];
+extern const uint8_t RDAUXD[2];
 
 
 

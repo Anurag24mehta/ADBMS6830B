@@ -1,2 +1,4 @@
-../Core/Src/iso_spi.c:15:6:BMS_WRITE	1
-../Core/Src/iso_spi.c:29:6:BMS_READ	1
+../Core/Src/iso_spi.c:15:6:BMS_WRITE	2
+../Core/Src/iso_spi.c:32:6:BMS_READ	1
+../Core/Src/iso_spi.c:43:6:BMS_SNAP	1
+../Core/Src/iso_spi.c:50:6:BMS_UNSNAP	1

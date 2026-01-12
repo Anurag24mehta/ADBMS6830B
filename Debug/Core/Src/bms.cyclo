@@ -1,4 +1,10 @@
-../Core/Src/bms.c:27:6:BMS_INIT	1
-../Core/Src/bms.c:48:6:READ_ALL_CELL_VOLTAGE	3
-../Core/Src/bms.c:71:6:PRINT_ALL_CELL_VOLTAGE	3
-../Core/Src/bms.c:80:6:OPEN_WIRE_CHECK	8
+../Core/Src/bms.c:19:6:BMS_INIT	1
+../Core/Src/bms.c:43:6:READ_ALL_CELL_VOLTAGE	6
+../Core/Src/bms.c:92:6:PRINT_ALL_CELL_VOLTAGE	3
+../Core/Src/bms.c:114:6:OPEN_WIRE_CHECK	12
+../Core/Src/bms.c:202:6:READ_ALL_TEMP	6
+../Core/Src/bms.c:266:6:OPEN_WIRE_TEMP	7
+../Core/Src/bms.c:333:6:Cell_SetVoltage	3
+../Core/Src/bms.c:342:6:Cell_SetTemp	1
+../Core/Src/bms.c:353:6:Cell_SetOWV	2
+../Core/Src/bms.c:363:6:Cell_SetOWT	2
