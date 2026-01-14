@@ -138,7 +138,8 @@ int main(void)
   {
 	uint8_t ADSV_ODD[4] = {0x1u, 0xE9u, 0x48u, 0xDCu};
 	uint8_t ADSV_EVEN[4] = {0x1u, 0xEAu, 0x5Eu, 0xB8u};
-	uint8_t WRCFGB_TEMP[6] = {0x1Du, 0x52u, 0x46u, 0x0u, 0x4u, 0x0u};
+	uint8_t WRCFGA_TEMP_1[12] = {0x0u, 0x01u, 0x3Du, 0x6Eu, 0x81u, 0x00u, 0x00u, 0xFFu, 0x03u, 0x00u, 0x02u, 0x8Eu};
+	uint8_t WRCFGA_TEMP_2[6] = {0x81u, 0x0u, 0x0u, 0xFFu, 0x1u, 0x0u};
 	uint8_t RDCFGA_CPEC[4] = {0x0u, 0x02u, 0x2Bu, 0x0Au};
 	uint8_t RDACA_TEMP[16] = {0};
 	uint8_t RDACB_TEMP[16] = {0};
@@ -147,7 +148,7 @@ int main(void)
 	uint8_t RDACE_TEMP[16] = {0};
 	uint8_t RDACF_TEMP[16] = {0};
 
-	uint8_t RDCFGA_DATA[8] = {0};
+	uint8_t RDCFGA_DATA[16] = {0};
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);		//wake up sequence
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, RESET);
 
@@ -167,16 +168,16 @@ int main(void)
 //	BMS_READ(SEGMENT, RDACE, RDACE_TEMP, 16u);
 //	BMS_READ(SEGMENT, RDACF, RDACF_TEMP, 16u);
 
+//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+//	HAL_SPI_Transmit(&hspi2,WRCFGA_TEMP_1, 12, 50);
+//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+//	HAL_Delay(1);
 
 //
-//	BMS_WRITE(SEGMENT, WRCFGB, WRCFGB_TEMP);
+//	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_TEMP_2);
 	//	HAL_Delay(1);
 //	BMS_READ(SEGMENT, RDCFGA, RDCFGA_DATA,8u);
 
-//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-//	HAL_SPI_Transmit(&hspi2,RDCFGA_CPEC, 4, 50);
-//	HAL_SPI_Receive(&hspi2, RDCFGA_DATA, 16, 50);
-//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
 //
 //	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10,GPIO_PIN_RESET);
 //	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10,GPIO_PIN_SET);
@@ -219,7 +220,7 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST);
+  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -230,7 +231,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
-  RCC_OscInitStruct.PLL.PLLN = 20;
+  RCC_OscInitStruct.PLL.PLLN = 10;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -244,11 +245,11 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }

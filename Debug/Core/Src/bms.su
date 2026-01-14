@@ -3,8 +3,8 @@
 ../Core/Src/bms.c:92:6:PRINT_ALL_CELL_VOLTAGE	88	static
 ../Core/Src/bms.c:114:6:OPEN_WIRE_CHECK	104	static
 ../Core/Src/bms.c:202:6:READ_ALL_TEMP	72	static
-../Core/Src/bms.c:266:6:OPEN_WIRE_TEMP	72	static
-../Core/Src/bms.c:333:6:Cell_SetVoltage	32	static
-../Core/Src/bms.c:342:6:Cell_SetTemp	24	static
-../Core/Src/bms.c:353:6:Cell_SetOWV	32	static
-../Core/Src/bms.c:363:6:Cell_SetOWT	32	static
+../Core/Src/bms.c:268:6:OPEN_WIRE_TEMP	72	static
+../Core/Src/bms.c:337:6:Cell_SetVoltage	32	static
+../Core/Src/bms.c:346:6:Cell_SetTemp	24	static
+../Core/Src/bms.c:356:6:Cell_SetOWV	32	static
+../Core/Src/bms.c:366:6:Cell_SetOWT	32	static

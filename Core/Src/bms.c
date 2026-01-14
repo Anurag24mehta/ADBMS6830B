@@ -200,12 +200,13 @@ void OPEN_WIRE_CHECK(BMS_t *BMS){
 
 
 void READ_ALL_TEMP(BMS_t *BMS){
-	uint8_t WRCFGA_SEL[6] = {0x84u, 0x0u, 0x0u, 0xFFu, 0x2u, 0x0u};  //To Change The Select Lines
+	uint8_t WRCFGA_SEL[6] = {0x81u, 0x0u, 0x0u, 0xFFu, 0x1u, 0x0u};  //To Change The Select Lines
 	uint8_t ADAX[4] = {0x4u, 0x10u, 0x51u, 0x14u};  //Read All GPIO //Select Line = 1 Is Selected
 	uint8_t RDAUXA_DATA[SEGMENT*8] = {0};
 	uint8_t RDAUXB_DATA[SEGMENT*8] = {0};
 	uint8_t RDAUXC_DATA[SEGMENT*8] = {0};
 
+	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_SEL);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi2, ADAX, 4, 50);		//START ADAX Conversion
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
@@ -233,12 +234,13 @@ void READ_ALL_TEMP(BMS_t *BMS){
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
 		uint16_t i = module * 8;
-		Cell_SetTemp(&BMS[module].CELL[6], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]));
-		Cell_SetTemp(&BMS[module].CELL[7], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]));
-		Cell_SetTemp(&BMS[module].CELL[8], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]));
+		Cell_SetTemp(&BMS[module].CELL[7], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]));
+		Cell_SetTemp(&BMS[module].CELL[9], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]));
+		Cell_SetTemp(&BMS[module].CELL[11], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]));
 	}
 
-	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_SEL);
+	BMS_INIT();
+//	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_SEL);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi2, ADAX, 4, 50);		//START ADAX Conversion
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
@@ -250,13 +252,13 @@ void READ_ALL_TEMP(BMS_t *BMS){
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
 		uint16_t i = module * 8;
-		Cell_SetTemp(&BMS[module].CELL[9], (int16_t)(((uint16_t)RDAUXB_DATA[i+5] << 8) | RDAUXB_DATA[i+4]));
+		Cell_SetTemp(&BMS[module].CELL[6], (int16_t)(((uint16_t)RDAUXB_DATA[i+5] << 8) | RDAUXB_DATA[i+4]));
 	}
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
 		uint16_t i = module * 8;
-		Cell_SetTemp(&BMS[module].CELL[10], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]));
-		Cell_SetTemp(&BMS[module].CELL[11], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]));
+		Cell_SetTemp(&BMS[module].CELL[8], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]));
+		Cell_SetTemp(&BMS[module].CELL[10], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]));
 		Cell_SetTemp(&BMS[module].CELL[12], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]));
 		Cell_SetTemp(&BMS[module].CELL[13], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]));
 	}
@@ -265,12 +267,13 @@ void READ_ALL_TEMP(BMS_t *BMS){
 
 void OPEN_WIRE_TEMP(BMS_t *BMS){
 	uint8_t OPEN_WIRE_FLAG = 0;
-	uint8_t WRCFGA_SEL[6] = {0x84u, 0x0u, 0x0u, 0xFFu, 0x2u, 0x0u};  //To Change The Select Lines
+	uint8_t WRCFGA_SEL[6] = {0x81u, 0x0u, 0x0u, 0xFFu, 0x1u, 0x0u};  //To Change The Select Lines
 	uint8_t ADAX[4] = {0x05u, 0x90u, 0x9Du, 0x7Eu};
 	uint8_t RDAUXA_DATA[SEGMENT*8] = {0};
 	uint8_t RDAUXB_DATA[SEGMENT*8] = {0};
 	uint8_t RDAUXC_DATA[SEGMENT*8] = {0};
 
+	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_SEL);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi2, ADAX, 4, 50);		//START ADAX Conversion
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
@@ -298,12 +301,13 @@ void OPEN_WIRE_TEMP(BMS_t *BMS){
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
 		uint16_t i = module * 8;
-		Cell_SetOWT(&BMS[module].CELL[6], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]), &OPEN_WIRE_FLAG);
-		Cell_SetOWT(&BMS[module].CELL[7], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]), &OPEN_WIRE_FLAG);
-		Cell_SetOWT(&BMS[module].CELL[8], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]), &OPEN_WIRE_FLAG);
+		Cell_SetOWT(&BMS[module].CELL[7], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]), &OPEN_WIRE_FLAG);
+		Cell_SetOWT(&BMS[module].CELL[9], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]), &OPEN_WIRE_FLAG);
+		Cell_SetOWT(&BMS[module].CELL[11], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]), &OPEN_WIRE_FLAG);
 	}
 
-	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_SEL);
+//	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_SEL);
+	BMS_INIT();
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi2, ADAX, 4, 50);		//START ADAX Conversion
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
@@ -315,13 +319,13 @@ void OPEN_WIRE_TEMP(BMS_t *BMS){
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
 		uint16_t i = module * 8;
-		Cell_SetOWT(&BMS[module].CELL[9], (int16_t)(((uint16_t)RDAUXB_DATA[i+5] << 8) | RDAUXB_DATA[i+4]), &OPEN_WIRE_FLAG);
+		Cell_SetOWT(&BMS[module].CELL[6], (int16_t)(((uint16_t)RDAUXB_DATA[i+5] << 8) | RDAUXB_DATA[i+4]), &OPEN_WIRE_FLAG);
 	}
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
 		uint16_t i = module * 8;
-		Cell_SetOWT(&BMS[module].CELL[10], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]), &OPEN_WIRE_FLAG);
-		Cell_SetOWT(&BMS[module].CELL[11], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]), &OPEN_WIRE_FLAG);
+		Cell_SetOWT(&BMS[module].CELL[8], (int16_t)(((uint16_t)RDAUXC_DATA[i+1] << 8) | RDAUXC_DATA[i]), &OPEN_WIRE_FLAG);
+		Cell_SetOWT(&BMS[module].CELL[10], (int16_t)(((uint16_t)RDAUXC_DATA[i+3] << 8) | RDAUXC_DATA[i+2]), &OPEN_WIRE_FLAG);
 		Cell_SetOWT(&BMS[module].CELL[12], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]), &OPEN_WIRE_FLAG);
 		Cell_SetOWT(&BMS[module].CELL[13], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]), &OPEN_WIRE_FLAG);
 	}
@@ -341,8 +345,7 @@ void Cell_SetVoltage(Cell_t *cell, int16_t v){
 
 void Cell_SetTemp(Cell_t *cell, int16_t t){
 	float temp = voltage_to_temperature(t);
-//	float x = t * 0.000150f + 1.5f;
-//	printf("%f \r\n",x);
+	float x = t * 0.000150f + 1.5f;
 	cell-> ot = 0;
 	cell-> ut = 0;
 	cell->temperature = temp;
