@@ -111,15 +111,103 @@ void PRINT_ALL_CELL_VOLTAGE(BMS_t *BMS){
     }
 }
 
+//void OPEN_WIRE_CHECK(BMS_t *BMS){
+//	uint8_t ADSV_ODD[4] = {0x1u, 0xE9u, 0x48u, 0xDCu};
+//	uint8_t ADSV_EVEN[4] = {0x1u, 0xEAu, 0x5Eu, 0xB8u};
+//	uint8_t OPEN_WIRE_FLAG = 0;
+//
+//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
+//	HAL_SPI_Transmit(&hspi2, ADSV_ODD, 4, 50);		//Check for odd cell for open wire
+//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
+////	HAL_Delay(8);
+//	uint8_t RDACA_DATA[SEGMENT*8] = {0};
+//	uint8_t RDACB_DATA[SEGMENT*8] = {0};
+//	uint8_t RDACC_DATA[SEGMENT*8] = {0};
+//	uint8_t RDACD_DATA[SEGMENT*8] = {0};
+//	uint8_t RDACE_DATA[SEGMENT*8] = {0};
+//
+//	BMS_SNAP();
+//	BMS_READ(SEGMENT, RDSVA, RDACA_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVB, RDACB_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVC, RDACC_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVD, RDACD_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVE, RDACE_DATA, SEGMENT*8u);
+//	BMS_UNSNAP();
+//
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//		uint16_t i = module * 8;
+//		Cell_SetOWV(&BMS[module].CELL[0], (int16_t)(((uint16_t)RDACA_DATA[i+1] << 8) | RDACA_DATA[i]), &OPEN_WIRE_FLAG);
+//		Cell_SetOWV(&BMS[module].CELL[2], (int16_t)(((uint16_t)RDACA_DATA[i+5] << 8) | RDACA_DATA[i+4]), &OPEN_WIRE_FLAG);
+//
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[4], (int16_t)(((uint16_t)RDACB_DATA[i+3] << 8) | RDACB_DATA[i+2]), &OPEN_WIRE_FLAG);
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[6], (int16_t)(((uint16_t)RDACC_DATA[i+1] << 8) | RDACC_DATA[i]), &OPEN_WIRE_FLAG);
+//			Cell_SetOWV(&BMS[module].CELL[8], (int16_t)(((uint16_t)RDACC_DATA[i+5] << 8) | RDACC_DATA[i+4]), &OPEN_WIRE_FLAG);
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[10], (int16_t)(((uint16_t)RDACD_DATA[i+3] << 8) | RDACD_DATA[i+2]), &OPEN_WIRE_FLAG);
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[12], (int16_t)(((uint16_t)RDACE_DATA[i+1] << 8) | RDACE_DATA[i]), &OPEN_WIRE_FLAG);
+//	}
+//
+//	BMS_INIT();
+//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
+//	HAL_SPI_Transmit(&hspi2, ADSV_EVEN, 4, 50);		//Check for odd cell for open wire
+//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
+//	BMS_SNAP();
+//	BMS_READ(SEGMENT, RDSVA, RDACA_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVB, RDACB_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVC, RDACC_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVD, RDACD_DATA, SEGMENT*8u);
+//	BMS_READ(SEGMENT, RDSVE, RDACE_DATA, SEGMENT*8u);
+//	BMS_UNSNAP();
+//
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//		uint16_t i = module * 8;
+//		Cell_SetOWV(&BMS[module].CELL[1], (int16_t)(((uint16_t)RDACA_DATA[i+3] << 8) | RDACA_DATA[i+2]), &OPEN_WIRE_FLAG);
+//
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[3], (int16_t)(((uint16_t)RDACB_DATA[i+1] << 8) | RDACB_DATA[i]), &OPEN_WIRE_FLAG);
+//			Cell_SetOWV(&BMS[module].CELL[5], (int16_t)(((uint16_t)RDACB_DATA[i+5] << 8) | RDACB_DATA[i+4]), &OPEN_WIRE_FLAG);
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[7], (int16_t)(((uint16_t)RDACC_DATA[i+3] << 8) | RDACC_DATA[i+2]), &OPEN_WIRE_FLAG);
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[9], (int16_t)(((uint16_t)RDACD_DATA[i+1] << 8) | RDACD_DATA[i]), &OPEN_WIRE_FLAG);
+//			Cell_SetOWV(&BMS[module].CELL[11], (int16_t)(((uint16_t)RDACD_DATA[i+5] << 8) | RDACD_DATA[i+4]), &OPEN_WIRE_FLAG);
+//	}
+//	for (uint8_t module = 0; module < SEGMENT; module++){
+//			uint16_t i = module * 8;
+//			Cell_SetOWV(&BMS[module].CELL[13], (int16_t)(((uint16_t)RDACE_DATA[i+3] << 8) | RDACE_DATA[i+2]), &OPEN_WIRE_FLAG);
+//	}
+//	if (OPEN_WIRE_FLAG == 1){
+//		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+//	}
+//}
+
 void OPEN_WIRE_CHECK(BMS_t *BMS){
-	uint8_t ADSV_ODD[4] = {0x1u, 0xE9u, 0x48u, 0xDCu};
-	uint8_t ADSV_EVEN[4] = {0x1u, 0xEAu, 0x5Eu, 0xB8u};
+	uint8_t ADCV_ODD[4] = {0x2u, 0xE2u, 0xA5u, 0x50u};
+	uint8_t ADCV_EVEN[4] = {0x2u, 0xE1u, 0xB3u, 0x34u};
 	uint8_t OPEN_WIRE_FLAG = 0;
 
+	BMS_INIT();
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi2, ADSV_ODD, 4, 50);		//Check for odd cell for open wire
+	HAL_SPI_Transmit(&hspi2, ADCV_ODD, 4, 50);		//Check for odd cell for open wire
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
-//	HAL_Delay(8);
+	HAL_Delay(8);
 	uint8_t RDACA_DATA[SEGMENT*8] = {0};
 	uint8_t RDACB_DATA[SEGMENT*8] = {0};
 	uint8_t RDACC_DATA[SEGMENT*8] = {0};
@@ -127,11 +215,11 @@ void OPEN_WIRE_CHECK(BMS_t *BMS){
 	uint8_t RDACE_DATA[SEGMENT*8] = {0};
 
 	BMS_SNAP();
-	BMS_READ(SEGMENT, RDSVA, RDACA_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVB, RDACB_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVC, RDACC_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVD, RDACD_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVE, RDACE_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACA, RDACA_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACB, RDACB_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACC, RDACC_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACD, RDACD_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACE, RDACE_DATA, SEGMENT*8u);
 	BMS_UNSNAP();
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
@@ -160,14 +248,15 @@ void OPEN_WIRE_CHECK(BMS_t *BMS){
 
 	BMS_INIT();
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi2, ADSV_EVEN, 4, 50);		//Check for odd cell for open wire
+	HAL_SPI_Transmit(&hspi2, ADCV_EVEN, 4, 50);		//Check for odd cell for open wire
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
+	HAL_Delay(8);
 	BMS_SNAP();
-	BMS_READ(SEGMENT, RDSVA, RDACA_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVB, RDACB_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVC, RDACC_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVD, RDACD_DATA, SEGMENT*8u);
-	BMS_READ(SEGMENT, RDSVE, RDACE_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACA, RDACA_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACB, RDACB_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACC, RDACC_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACD, RDACD_DATA, SEGMENT*8u);
+	BMS_READ(SEGMENT, RDACE, RDACE_DATA, SEGMENT*8u);
 	BMS_UNSNAP();
 
 	for (uint8_t module = 0; module < SEGMENT; module++){
@@ -194,7 +283,7 @@ void OPEN_WIRE_CHECK(BMS_t *BMS){
 			Cell_SetOWV(&BMS[module].CELL[13], (int16_t)(((uint16_t)RDACE_DATA[i+3] << 8) | RDACE_DATA[i+2]), &OPEN_WIRE_FLAG);
 	}
 	if (OPEN_WIRE_FLAG == 1){
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, SET);
 	}
 }
 
@@ -330,7 +419,7 @@ void OPEN_WIRE_TEMP(BMS_t *BMS){
 		Cell_SetOWT(&BMS[module].CELL[13], (int16_t)(((uint16_t)RDAUXC_DATA[i+5] << 8) | RDAUXC_DATA[i+4]), &OPEN_WIRE_FLAG);
 	}
 	if (OPEN_WIRE_FLAG == 1){
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, SET);
 	}
 }
 
@@ -355,8 +444,6 @@ void Cell_SetTemp(Cell_t *cell, int16_t t){
 
 void Cell_SetOWV(Cell_t *cell, int16_t v, uint8_t *ow_flag){
 	float x = v * 0.000150f + 1.5f;
-//		printf("%f \r\n",x);
-
 	cell->ow_cell = 0;
 	if (x < 0.4){
 		cell->ow_cell = 1;

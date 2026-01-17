@@ -1,10 +1,10 @@
 ../Core/Src/bms.c:19:6:BMS_INIT	32	static
 ../Core/Src/bms.c:43:6:READ_ALL_CELL_VOLTAGE	72	static
 ../Core/Src/bms.c:92:6:PRINT_ALL_CELL_VOLTAGE	88	static
-../Core/Src/bms.c:114:6:OPEN_WIRE_CHECK	104	static
-../Core/Src/bms.c:202:6:READ_ALL_TEMP	72	static
-../Core/Src/bms.c:268:6:OPEN_WIRE_TEMP	72	static
-../Core/Src/bms.c:337:6:Cell_SetVoltage	32	static
-../Core/Src/bms.c:346:6:Cell_SetTemp	24	static
-../Core/Src/bms.c:356:6:Cell_SetOWV	32	static
-../Core/Src/bms.c:366:6:Cell_SetOWT	32	static
+../Core/Src/bms.c:201:6:OPEN_WIRE_CHECK	104	static
+../Core/Src/bms.c:291:6:READ_ALL_TEMP	72	static
+../Core/Src/bms.c:357:6:OPEN_WIRE_TEMP	72	static
+../Core/Src/bms.c:426:6:Cell_SetVoltage	32	static
+../Core/Src/bms.c:435:6:Cell_SetTemp	24	static
+../Core/Src/bms.c:445:6:Cell_SetOWV	32	static
+../Core/Src/bms.c:453:6:Cell_SetOWT	32	static

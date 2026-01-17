@@ -121,14 +121,8 @@ int main(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
   HAL_Delay(1);
   BMS_t BMS[SEGMENT];
-
-//  BMS_WRITE(WRCFGA, WRCFGA_DATA, 6u);
-	BMS_INIT();
+  BMS_INIT();
   HAL_Delay(2);
-
-//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10,GPIO_PIN_RESET);
-//	HAL_SPI_Transmit(&hspi2, ADCV, 4, 50);		//Check for odd cell for open wire
-//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10,GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 
@@ -136,68 +130,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	uint8_t ADSV_ODD[4] = {0x1u, 0xE9u, 0x48u, 0xDCu};
-	uint8_t ADSV_EVEN[4] = {0x1u, 0xEAu, 0x5Eu, 0xB8u};
-	uint8_t WRCFGA_TEMP_1[12] = {0x0u, 0x01u, 0x3Du, 0x6Eu, 0x81u, 0x00u, 0x00u, 0xFFu, 0x03u, 0x00u, 0x02u, 0x8Eu};
-	uint8_t WRCFGA_TEMP_2[6] = {0x81u, 0x0u, 0x0u, 0xFFu, 0x1u, 0x0u};
-	uint8_t RDCFGA_CPEC[4] = {0x0u, 0x02u, 0x2Bu, 0x0Au};
-	uint8_t RDACA_TEMP[16] = {0};
-	uint8_t RDACB_TEMP[16] = {0};
-	uint8_t RDACC_TEMP[16] = {0};
-	uint8_t RDACD_TEMP[16] = {0};
-	uint8_t RDACE_TEMP[16] = {0};
-	uint8_t RDACF_TEMP[16] = {0};
-
-	uint8_t RDCFGA_DATA[16] = {0};
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_RESET);		//wake up sequence
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, RESET);
-
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, RESET);
 	HAL_Delay(5);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9,GPIO_PIN_SET);
-	HAL_Delay(1);//	HAL_Delay(1);
-//	BMS_READ(SEGMENT, RDACALL, RDACALL_TEMP, 68u);
-//	BMS_INIT();
+	HAL_Delay(1);
 
-
-
-
-//	BMS_READ(SEGMENT, RDACA, RDACA_TEMP, 16u);
-//	BMS_READ(SEGMENT, RDACB, RDACB_TEMP, 16u);
-//	BMS_READ(SEGMENT, RDACC, RDACC_TEMP, 16u);
-//	BMS_READ(SEGMENT, RDACD, RDACD_TEMP, 16u);
-//	BMS_READ(SEGMENT, RDACE, RDACE_TEMP, 16u);
-//	BMS_READ(SEGMENT, RDACF, RDACF_TEMP, 16u);
-
-//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-//	HAL_SPI_Transmit(&hspi2,WRCFGA_TEMP_1, 12, 50);
-//	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
-//	HAL_Delay(1);
-
-//
-//	BMS_WRITE(SEGMENT, WRCFGA, WRCFGA_TEMP_2);
-	//	HAL_Delay(1);
-//	BMS_READ(SEGMENT, RDCFGA, RDCFGA_DATA,8u);
-
-//
-//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10,GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10,GPIO_PIN_SET);
-//	HAL_Delay(2);
-//
-//	print_hex("RDCFGA",RDCFGA_DATA, 8u);
-//	print_hex("RDACB",RDACB_TEMP, 16u);
-//	print_hex("RDACC",RDACC_TEMP, 16u);
-//	print_hex("RDACD",RDACD_TEMP, 16u);
-//	print_hex("RDACE",RDACE_TEMP, 16u);
-//	print_hex("RDACF",RDACF_TEMP, 16u);
-
-//
-
-
-//	HAL_Delay(1);
-//	BMS_READ(RDCVA, RDCVA_DATA, 8u);
-//	HAL_Delay(1);
-	OPEN_WIRE_CHECK(&BMS[0]);
 	READ_ALL_CELL_VOLTAGE(&BMS[0]);
+	OPEN_WIRE_CHECK(&BMS[0]);
 	READ_ALL_TEMP(&BMS[0]);
 	OPEN_WIRE_TEMP(&BMS[0]);
 	PRINT_ALL_CELL_VOLTAGE(&BMS[0]);
